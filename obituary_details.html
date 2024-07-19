@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ obituary.name }} Obituary</title>
+    <meta name="description" content="{{ obituary.content|truncatewords:30 }}">
+    <meta name="keywords" content="obituary, {{ obituary.name }}, {{ obituary.date_of_birth }}, {{ obituary.date_of_death }}">
+    {% include 'seo/open_graph.html' %}
+</head>
+<body>
+    <div class="container">
+        <h1>{{ obituary.name }}</h1>
+        <p><strong>Date of Birth:</strong> {{ obituary.date_of_birth }}</p>
+        <p><strong>Date of Death:</strong> {{ obituary.date_of_death }}</p>
+        <div>{{ obituary.content }}</div>
+        <p><strong>Author:</strong> {{ obituary.author }}</p>
+        {% include 'seo/social_share_buttons.html' %}
+    </div>
+</body>
+</html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ obituary.name }} Obituary</title>
+    <meta name="description" content="{{ obituary.content|truncatewords:30 }}">
+    <meta name="keywords" content="obituary, {{ obituary.name }}, {{ obituary.date_of_birth }}, {{ obituary.date_of_death }}">
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Obituary",
+        "name": "{{ obituary.name }}",
+        "dateOfBirth": "{{ obituary.date_of_birth }}",
+        "dateOfDeath": "{{ obituary.date_of_death }}",
+        "articleBody": "{{ obituary.content|truncatewords:50 }}",
+        "author": "{{ obituary.author }}",
+        "datePublished": "{{ obituary.submission_date }}"
+    }
+    </script>
+    {% include 'seo/open_graph.html' %}
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>{{ obituary.name }}</h1>
+        </header>
+        <section>
+            <p><strong>Date of Birth:</strong> {{ obituary.date_of_birth }}</p>
+            <p><strong>Date of Death:</strong> {{ obituary.date_of_death }}</p>
+            <div>{{ obituary.content }}</div>
+            <p><strong>Author:</strong> {{ obituary.author }}</p>
+        </section>
+        <footer>
+            {% include 'seo/social_share_buttons.html' %}
+        </footer>
+    </div>
+</body>
+</html>

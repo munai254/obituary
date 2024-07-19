@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Obituaries</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            color: #007BFF;
+            padding: 10px 15px;
+            text-decoration: none;
+            border: 1px solid #ccc;
+            margin: 0 5px;
+            border-radius: 4px;
+        }
+
+        .pagination a:hover {
+            background-color: #ddd;
+        }
+
+        .pagination a.active {
+            background-color: #007BFF;
+            color: white;
+            border: 1px solid #007BFF;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Obituaries</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date of Birth</th>
+                    <th>Date of Death</th>
+                    <th>Content</th>
+                    <th>Author</th>
+                    <th>Submission Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obituary in obituaries %}
+                <tr>
+                    <td>{{ obituary.name }}</td>
+                    <td>{{ obituary.date_of_birth }}</td>
+                    <td>{{ obituary.date_of_death }}</td>
+                    <td>{{ obituary.content }}</td>
+                    <td>{{ obituary.author }}</td>
+                    <td>{{ obituary.submission_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            {% if obituaries.has_previous %}
+                <a href="?page=1">&laquo; First</a>
+                <a href="?page={{ obituaries.previous_page_number }}">&lsaquo; Prev</a>
+            {% endif %}
+
+            {% for num in obituaries.paginator.page_range %}
+                {% if obituaries.number == num %}
+                    <a href="#" class="active">{{ num }}</a>
+                {% elif num > obituaries.number|add:'-5' and num < obituaries.number|add:'5' %}
+                    <a href="?page={{ num }}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if obituaries.has_next %}
+                <a href="?page={{ obituaries.next_page_number }}">Next &rsaquo;</a>
+                <a href="?page={{ obituaries.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+
+<head>
+    <meta name="description" content="{{ obituary.content }}">
+    <meta name="keywords" content="obituary, {{ obituary.name }}">
+    <meta property="og:title" content="{{ obituary.name }}">
+    <meta property="og:description" content="{{ obituary.content }}">
+    <meta property="og:type" content="article">
+</head>
+

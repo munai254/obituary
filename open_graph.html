@@ -1,0 +1,6 @@
+<meta property="og:title" content="{{ obituary.name }} Obituary">
+<meta property="og:description" content="{{ obituary.content|truncatewords:30 }}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="{{ request.build_absolute_uri }}">
+<meta property="og:image" content="{% static 'images/obituary.jpg' %}">
+<meta property="og:site_name" content="Obituary Platform">

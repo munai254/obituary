@@ -1,0 +1,12 @@
+<div class="social-share">
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank">
+        <img src="{% static 'images/facebook.png' %}" alt="Share on Facebook">
+    </a>
+    <a href="https://twitter.com/intent/tweet?text={{ obituary.name }} Obituary&url={{ request.build_absolute_uri }}" target="_blank">
+        <img src="{% static 'images/twitter.png' %}" alt="Share on Twitter">
+    </a>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}" target="_blank">
+        <img src="{% static 'images/linkedin.png' %}" alt="Share on LinkedIn">
+    </a>
+</div>
+<link rel="canonical" href="{{ request.build_absolute_uri }}">
